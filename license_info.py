@@ -39,14 +39,14 @@ def save_btn_click():
 
 
 def table_select(x):
-    selected_person = table.item(table.focus())["values"]
-    if selected_person:
-        id.set(selected_person[0])
-        name.set(selected_person[1])
-        family.set(selected_person[2])
-        license_number.set(selected_person[3])
-        data.set(selected_person[4])
-        license_type.set(selected_person[5])
+    selected_license = table.item(table.focus())["values"]
+    if selected_license:
+        id.set(selected_license[0])
+        name.set(selected_license[1])
+        family.set(selected_license[2])
+        license_number.set(selected_license[3])
+        data.set(selected_license[4])
+        license_type.set(selected_license[5])
 
 
 
