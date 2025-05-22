@@ -50,17 +50,17 @@ def table_select(x):
 
 
 
-#def edit_btn_click():
- #   pass
+def edit_btn_click():
+    pass
 
 
-#def remove_btn_click():
- #   pass#
+def remove_btn_click():
+    pass
 
 
 window = Tk()
-window.title("Person Info")
-window.geometry("610x270")
+window.title("license Info")
+window.geometry("900x270")
 
 # Id
 Label(window, text="Id").place(x=20, y=10)
@@ -112,8 +112,8 @@ table.bind("<<TreeviewSelect>>", table_select)
 table.place(x=230, y=20)
 
 Button(window, text="Save", width=6, command=save_btn_click).place(x=20, y=220)
-#Button(window, text="Edit", width=6, command=edit_btn_click).place(x=90, y=220)
-#Button(window, text="Remove", width=6, command=remove_btn_click).place(x=160, y=220)
+Button(window, text="Edit", width=6, command=edit_btn_click).place(x=90, y=220)
+Button(window, text="Remove", width=6, command=remove_btn_click).place(x=160, y=220)
 Button(window, text="Clear", width=6, command=reset_form).place(x=20, y=180, width=190)
 
 reset_form()
