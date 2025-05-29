@@ -2,6 +2,7 @@ from tkinter import *
 import tkinter.ttk as ttk
 import tkinter.messagebox as msg
 from file_manager import *
+from license import License
 from validator import *
 
 license_list = read_from_file("license.dat")
@@ -13,7 +14,7 @@ def load_data(license_list):
         table.delete(row)
 
     for license in license_list:
-        table.insert("", END, values=license)
+        table.insert("", END, values=license.to_tuple())
 
 
 def reset_form():
@@ -21,14 +22,14 @@ def reset_form():
     name.set("")
     family.set("")
     license_number.set("")
-    data.set("")
+    license_date.set("")
     license_type.set("")
     load_data(license_list)
 
 
 def save_btn_click():
-    license = (id.get(), name.get(), family.get(), license_number.get(),data.get(), license_type.get())
-    errors = license_validator(license)
+    license = License(id.get(), name.get(), family.get(), license_number.get(), license_date.get(), license_type.get())
+    errors = license.validate()
     if errors:
         msg.showerror("Errors", "\n".join(errors))
     else:
@@ -39,15 +40,14 @@ def save_btn_click():
 
 
 def table_select(x):
-    selected_license = table.item(table.focus())["values"]
+    selected_license = License(*table.item(table.focus())["values"])
     if selected_license:
-        id.set(selected_license[0])
-        name.set(selected_license[1])
-        family.set(selected_license[2])
-        license_number.set(selected_license[3])
-        data.set(selected_license[4])
-        license_type.set(selected_license[5])
-
+        id.set(selected_license.id)
+        name.set(selected_license.name)
+        family.set(selected_license.family)
+        license_number.set(selected_license.license_number)
+        license_date.set(selected_license.license_date)
+        license_type.set(selected_license.license_type)
 
 
 def edit_btn_click():
@@ -56,7 +56,7 @@ def edit_btn_click():
         msg.showwarning("Select Record", "Please select a record to edit.")
         return
 
-    new_license = (id.get(), name.get(), family.get(), license_number.get(), data.get(), license_type.get())
+    new_license = (id.get(), name.get(), family.get(), license_number.get(), license_date.get(), license_type.get())
     errors = license_validator(new_license)
     if errors:
         msg.showerror("Validation Error", "\n".join(errors))
@@ -113,16 +113,16 @@ license_number = StringVar()
 Entry(window, textvariable=license_number).place(x=100, y=85)
 
 # Data
-Label(window, text="Data").place(x=20, y=110)
-data = StringVar()
-Entry(window, textvariable=data).place(x=100, y=110)
+Label(window, text="Date").place(x=20, y=110)
+license_date = StringVar()
+Entry(window, textvariable=license_date).place(x=100, y=110)
 
 # License Type
 Label(window, text="License Type").place(x=20, y=135)
-license_type= StringVar()
+license_type = StringVar()
 Entry(window, textvariable=license_type).place(x=100, y=135)
 
-table = ttk.Treeview(window, columns=[1, 2, 3, 4,5,6], show="headings")
+table = ttk.Treeview(window, columns=[1, 2, 3, 4, 5, 6], show="headings")
 table.heading(1, text="Id")
 table.heading(2, text="Name")
 table.heading(3, text="Family")
