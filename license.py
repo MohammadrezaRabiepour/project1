@@ -7,11 +7,9 @@ class License:
         self.license_number = license_number
         self.data = data
         self.license_type = license_type
-        self.license_list = []
     def save(self):
         print(f"{self.id} {self.name} {self.family} {self.license_number} saved")
-    def add_license(self, license):
-        self.license_list.append(license)
+
 
     def license_validator(self,license):
         errors = []
