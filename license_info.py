@@ -56,14 +56,16 @@ def edit_btn_click():
         msg.showwarning("Select Record", "Please select a record to edit.")
         return
 
-    new_license = (id.get(), name.get(), family.get(), license_number.get(), license_date.get(), license_type.get())
-    errors = license_validator(new_license)
+    new_license = License(id.get(), name.get(), family.get(), license_number.get(), license_date.get(),
+                          license_type.get())
+
+    errors = new_license.validate()
     if errors:
         msg.showerror("Validation Error", "\n".join(errors))
         return
 
     for index in range(len(license_list)):
-        if str(license_list[index][0]) == str(new_license[0]):
+        if license_list[index].id == new_license.id:
             license_list[index] = new_license
             break
 
@@ -78,7 +80,7 @@ def remove_btn_click():
         selected_license = table.item(selected_item)["values"]
         new_list = []
         for item in license_list:
-            if item[0] != selected_license[0]:
+            if item.id != selected_license[0]:
                 new_list.append(item)
         license_list[:] = new_list
         write_to_file("license.dat", license_list)
