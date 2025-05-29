@@ -93,34 +93,34 @@ window.title("license Info")
 window.geometry("900x270")
 
 # Id
-Label(window, text="Id").place(x=20, y=10)
+Label(window, text="Id").place(x=20, y=20)
 id = IntVar(value=1)
-Entry(window, textvariable=id, state="readonly").place(x=100, y=10)
+Entry(window, textvariable=id, state="readonly").place(x=100, y=20)
 
 # Name
-Label(window, text="Name").place(x=20, y=35)
+Label(window, text="Name").place(x=20, y=45)
 name = StringVar()
-Entry(window, textvariable=name).place(x=100, y=35)
+Entry(window, textvariable=name).place(x=100, y=45)
 
 # Family
-Label(window, text="Family").place(x=20, y=60)
+Label(window, text="Family").place(x=20, y=70)
 family = StringVar()
-Entry(window, textvariable=family).place(x=100, y=60)
+Entry(window, textvariable=family).place(x=100, y=70)
 
 # License Number
-Label(window, text="License Number").place(x=5, y=85)
+Label(window, text="License Number").place(x=5, y=95)
 license_number = StringVar()
-Entry(window, textvariable=license_number).place(x=100, y=85)
+Entry(window, textvariable=license_number).place(x=100, y=95)
 
 # Data
-Label(window, text="Date").place(x=20, y=110)
+Label(window, text="Date").place(x=20, y=120)
 license_date = StringVar()
-Entry(window, textvariable=license_date).place(x=100, y=110)
+Entry(window, textvariable=license_date).place(x=100, y=120)
 
 # License Type
-Label(window, text="License Type").place(x=20, y=135)
+Label(window, text="License Type").place(x=20, y=145)
 license_type = StringVar()
-Entry(window, textvariable=license_type).place(x=100, y=135)
+Entry(window, textvariable=license_type).place(x=100, y=145)
 
 table = ttk.Treeview(window, columns=[1, 2, 3, 4, 5, 6], show="headings")
 table.heading(1, text="Id")
