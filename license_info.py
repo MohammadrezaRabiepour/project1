@@ -51,11 +51,41 @@ def table_select(x):
 
 
 def edit_btn_click():
-    pass
+    selected_item = table.focus()
+    if not selected_item:
+        msg.showwarning("Select Record", "Please select a record to edit.")
+        return
+
+    new_license = (id.get(), name.get(), family.get(), license_number.get(), data.get(), license_type.get())
+    errors = license_validator(new_license)
+    if errors:
+        msg.showerror("Validation Error", "\n".join(errors))
+        return
+
+    for index in range(len(license_list)):
+        if str(license_list[index][0]) == str(new_license[0]):
+            license_list[index] = new_license
+            break
+
+    write_to_file("license.dat", license_list)
+    msg.showinfo("Updated", "License info updated successfully.")
+    reset_form()
 
 
 def remove_btn_click():
-    pass
+    selected_item = table.focus()
+    if selected_item:
+        selected_license = table.item(selected_item)["values"]
+        new_list = []
+        for item in license_list:
+            if item[0] != selected_license[0]:
+                new_list.append(item)
+        license_list[:] = new_list
+        write_to_file("license.dat", license_list)
+        reset_form()
+    else:
+        msg.showwarning("Select Record", "Please select a record to remove.")
+        return
 
 
 window = Tk()

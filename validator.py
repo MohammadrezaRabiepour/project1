@@ -16,7 +16,7 @@ def license_validator(license):
     if not (type(license[3]) == str and re.match(r"^\d{8}$", license[3])):
         errors.append('Person License Number is Invalid')
 
-    if not (type(license[4]) == str and re.match(r"\d{4}[-/]\d{2}[-/]\d{2}$", license[4])):
+    if not (type(license[4]) == str and re.match(r"^\d{4}[-/](0[1-9]|1[0-2])[-/](0[1-9]|[12][0-9]|3[01])$", license[4])):
         errors.append('Issue Date')
 
     if not (type(license[5]) == str and re.match(r"^[a-zA-Z\s\d]{2,15}$", license[5])):
